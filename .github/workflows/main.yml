@@ -19,6 +19,10 @@ jobs:
       - name: Install ClawHub skill
         run: npx clawhub@latest install verified-agent-identity --force --no-input
 
+      - name: Install identity dependencies
+        run: |
+          npm install @0xpolygonid/js-sdk @iden3/js-iden3-core @iden3/js-iden3-auth ethers uuid shell-quote
+
       - name: Create Ethereum Identity
         run: node scripts/createNewEthereumIdentity.js
 

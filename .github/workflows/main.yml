@@ -2,15 +2,6 @@ name: Verify Human Identity
 
 on:
   workflow_dispatch:
-    inputs:
-      agent_name:
-        description: 'Agent Name'
-        required: true
-        default: 'zhraaish'
-      agent_description:
-        description: 'Agent Description'
-        required: true
-        default: 'zhraaish AI Agent'
 
 jobs:
   verify:
@@ -28,18 +19,11 @@ jobs:
       - name: Install ClawHub skill
         run: npx clawhub@latest install verified-agent-identity --force --no-input
 
-      - name: Install base dependencies
-        run: npm install --legacy-peer-deps
-
-      - name: Install identity dependencies
-        run: |
-          npm install @0xpolygonid/js-sdk @iden3/js-iden3-core @iden3/js-iden3-auth ethers uuid shell-quote
-
       - name: Create Ethereum Identity
         run: node scripts/createNewEthereumIdentity.js
 
-      - name: Wait for circuits to load
+      - name: Wait for circuits
         run: sleep 15
 
       - name: Link Human to Agent
-        run: node scripts/manualLinkHumanToAgent.js --challenge '{"name":"zhraaish","description":"zhraaish AI Agent"}'
+        run: node scripts/manualLinkHumanToAgent.js --challenge '{"name":"zhraaish","description":"AI Agent"}'

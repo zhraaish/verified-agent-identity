@@ -27,17 +27,17 @@ jobs:
 
       - name: Step 1 - Install ClawHub skill
         run: npx clawhub@latest install verified-agent-identity --force --no-input
+
       - name: Install script dependencies
         run: |
-         cd scripts
-npm install --legacy-peer-deps
+          cd scripts
+          npm install --legacy-peer-deps
 
       - name: Step 2 - Create new Ethereum Identity
         run: node scripts/createNewEthereumIdentity.js
 
-- name: Wait for circuits to load
-  run: sleep 10
+      - name: Wait for circuits to load
+        run: sleep 10
 
       - name: Step 3 - Link Human to Agent
-        run: |
-          node scripts/manualLinkHumanToAgent.js --challenge '{"name": "zhraaish", "description": "zhraaish AI Agent"}'
+        run: node scripts/manualLinkHumanToAgent.js --challenge '{"name":"zhraaish","description":"zhraaish AI Agent"}'
